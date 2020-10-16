@@ -1,0 +1,32 @@
+/**
+ * Copyright by ayfie on 2020.
+ */
+
+.tagging-container {
+  display: flex;
+  clear: both;
+  flex-direction: column;
+  flex: 1 0;
+  margin-bottom: 20px;
+  width: auto;
+  padding: 10px;
+  &.busy {
+    opacity: 0.5;
+  }
+  .tag-remove-container {
+    padding: 10px 0 10px 0;
+  }
+
+  .tag-add-container {
+    margin: 10px 5px 0 0;
+    padding: 10px 0 10px 0;
+  }
+}
+
+.job-state {
+  margin-right: 20px;
+  display: flex;
+  > .update-spinner {
+    margin: 0 10px;
+  }
+}

@@ -1,0 +1,90 @@
+//@import "~src/assets/themes/default/scss/variables";
+
+.tag-add-wrapper {
+  min-height: 40px;
+}
+
+.tag-suggest-form {
+  position: absolute;
+  width: 50%;
+  float: left;
+}
+.tag-suggest-form {
+  height: fit-content;
+  border-radius: 15px;
+  padding: 2px 15px;
+  z-index: 10;
+  &:focus, &:hover {
+
+  }
+}
+
+.form-input-button {
+  display: flex;
+  > input {
+    float: left;
+    width: 90%;
+  }
+}
+.tag-suggest-input {
+  margin: 2px;
+
+}
+
+.tag-suggest-result {
+  visibility: visible;
+  height: fit-content;
+  &:not(.open) {
+    border-top: none;
+    visibility: hidden;
+    height: 0;
+  }
+  &.open{
+
+  }
+
+  .group-type {
+    width: 100%;
+    padding: 3px 0;
+  }
+}
+
+.tag-suggest-result .tag-item {
+  display: flex;
+  flex-direction: column;
+  clear: both;
+  margin: 3px 0;
+  padding: 3px;
+  height: fit-content;
+  list-style: none;
+  &:hover {
+
+  }
+  > .tag-label {
+    white-space: nowrap;
+    max-width: 270px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.tag-suggest-action {
+  margin: 5px 0 0 0;
+}
+
+.tag-list {
+  width: 40%;
+  float: right;
+  > .add-tag-action {
+    margin: 10px 0 0 0;
+    > .btn {
+      margin-right: 5px;
+    }
+  }
+}
+
+.add-x {
+  position: absolute;
+  right: 0;
+  margin: 13px 20px 0 0;
+}

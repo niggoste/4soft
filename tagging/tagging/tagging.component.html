@@ -1,0 +1,67 @@
+<div class="tag-add-wrapper">
+    <div class="tag-suggest-form input-box" (inspectorClickOutside)="closeSuggestResult()">
+
+        <div class="tag-suggest-input">
+            <form class="form-input-button">
+                <input type="text" aria-label="Number" autocomplete="false"
+                       (focus)="initTagSuggestions()"
+                       [formControl]="typeControl"
+                       [value]="inputValue">
+
+                <span class="btn btn-xs btn-default inverse rounded-button right" *ngIf="tagCanBeAdded"
+                      (click)="createNewTagFromInput()">
+                    <i class="fa fa-plus-circle"></i> Create new Tag
+                </span>
+            </form>
+        </div>
+
+        <div class="tag-suggest-result open">
+            <span class="tag-item small border-bottom-light-primary border-top-light-primary"
+                  [class.hide]="!(suggestIsOpen$ | async)">
+                suggested Tags
+            </span>
+
+            <span class="tag-item list-item link" [class.active-list-item]="suggestItem.isActive" *ngFor="let suggestItem of suggestions$ | async">
+                <span class="strong tag-label" [innerHTML]="suggestItem.item.label"></span>
+                <span class="small">{{suggestItem.item.source}}</span>
+                <span class="add-x">
+                    <span class="btn btn-default btn-xs inverse rounded-button" *ngIf="!suggestItem.item.isSelected"
+                          (click)="selectExistingTag(suggestItem.item)">
+                        <i class="fa fa-plus-circle"></i> Add
+                    </span>
+                    <span *ngIf="suggestItem.item.isSelected">
+                        <i class="fa fa-check fa-lg"></i>
+                    </span>
+                </span>
+            </span>
+        </div>
+    </div>
+
+    <div *ngIf="tagsToAdd && tagsToAdd.length > 0" class="tag-list">
+        <div class="">
+            <span class="badge entity inverse tag" *ngFor="let tag of tagsToAdd">
+                <span class="tag-label">
+                    <span class="tag-name">{{tag.value}}</span>
+                    <span>
+                        <i class="icon fa fa-times-circle fa-lg"
+                           (click)="removeTagFromListToAdd(tag)" matTooltip="Don't create this Tag"></i>
+                    </span>
+                </span>
+            </span>
+        </div>
+        <div class="add-tag-action">
+            <span *ngIf="tagsToAdd.length > 1" class="btn btn-default btn-xs inverse rounded-button" (click)="joinTags()">
+                <i class="fa fa-link fa-lg"></i>
+                Join Tags
+            </span>
+            <span class="btn btn-default btn-xs submit rounded-button right" (click)="tagResult()">
+                <i class="fa fa-tag fa-lg"></i>
+                {{getTagButtonText()}}
+            </span>
+            <span class="btn btn-default btn-xs inverse rounded-button right" (click)="cancel()">
+                <i class="fa fa-times-circle fa-lg"></i>
+                Cancel
+            </span>
+        </div>
+    </div>
+</div>

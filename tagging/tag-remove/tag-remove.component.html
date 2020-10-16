@@ -1,0 +1,43 @@
+<div class="tag-remove">
+    <div class="tag-suggest-remove">
+        <div class="tag-list">
+            <span class="badge tag inverse left" [class.inactive]="tag.isSelected" *ngFor="let tag of tags">
+                <span class="tag-label">
+                    <inspector-responsive-text-line class="tag-name" [text]="tag.label"></inspector-responsive-text-line>
+                    <span class="tag-value"> ({{tag.source}})</span>
+                </span>
+                <span (click)="toggleTagToRemove(tag)" class="remove-icon" matTooltip="Remove Tag from result">
+                    <i class="icon fa fa-trash-o fa-lg remove-tag"></i>
+                </span>
+            </span>
+        </div>
+        <div class="select-all right small">
+            <span class="link right" >
+                <span *ngIf="allTagsSelected" (click)="toggleAllTagToRemove()">
+                    <i class="icon fa fa-times fa-lg remove-tag"></i> Cancel
+                </span>
+                <span *ngIf="!allTagsSelected" (click)="toggleAllTagToRemove()">
+                    <i class="icon fa fa-trash-o fa-lg remove-tag"></i> Delete All Tags
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="remove-action " *ngIf="tagsToRemove.length > 0">
+        <div class="btn btn-xs btn-default inverse rounded-button" (click)="removeTagsFromResult()">
+            <i class="icon fa fa-trash-o fa-lg"></i> Remove marked Tags
+        </div>
+    </div>
+</div>
+
+<inspector-modal [templateRef]="clearTagsConfirmTemplate" [open$]="openDeleteTagsConfirm$"></inspector-modal>
+
+<ng-template #clearTagsConfirmTemplate>
+    <div class="">
+        <div class="modal-body text-center">
+            <p><strong>Are you sure you want to remove the selected tags?<br> This operation cannot be undone!</strong></p>
+            <button type="button" class="btn btn-primary" (click)="confirmDelete()">Yes, remove tags</button>
+            <button type="button" class="btn btn-default" (click)="cancel()" >Cancel</button>
+        </div>
+    </div>
+</ng-template>
+

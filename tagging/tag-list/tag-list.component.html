@@ -1,0 +1,28 @@
+<div *ngIf="tags">
+    <div *ngIf="tags.length > 0">
+        <div *ngFor="let tag of tags" class="badge entity inverse tag link"
+             [class.inactive]="tag.isSelected"
+             (click)="filter(tag)">
+            <span class="tag-label">
+                <span class="tag-name">
+                    <inspector-responsive-text-line [isItFilterValue]="false" [text]="tag.label"></inspector-responsive-text-line>
+                </span>
+                <span class="tag-value"> ({{tag.source}})</span>
+            </span>
+        </div>
+        <span class="right icon link tag" (click)="displayTaggingContainer(true)" matTooltip="{{getTooltipText()}}">
+            <i class="edit fa fa-pencil fa-lg" aria-hidden="true"></i>
+        </span>
+    </div>
+    <div *ngIf="tags.length === 0">
+        <span class="small">
+            {{getNoTagsText()}}
+        </span>
+        <span class="right icon link tag" (click)="displayTaggingContainer(true)"
+              matTooltip="{{getTooltipText()}}"
+              [matTooltipPosition]="'above'">
+            <i class="fa fa-plus fa-lg tag" aria-hidden="true"></i>
+            <i class="fa fa-tag fa-lg tag" aria-hidden="true"></i>
+        </span>
+    </div>
+</div>

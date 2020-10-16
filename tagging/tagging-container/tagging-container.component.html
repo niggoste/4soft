@@ -1,0 +1,41 @@
+<div id="tag-container" class="tagging-container"
+     [class.busy]="(jobState$ | async) === 'RUNNING'">
+    <div class="tag-list-container" *ngIf="!openEditTagContainer">
+        <inspector-tag-list (displayTaggingContainer$)="displayTaggingContainer($event)"
+                            [tags]="tags"
+                            [searchQuery]="searchQuery"
+                            [viewMode]="viewMode">
+        </inspector-tag-list>
+    </div>
+
+    <div class="left headline tag" *ngIf="openEditTagContainer">
+        <span>{{getHeadlineText()}}</span>
+        <span class="right close" (click)="displayTaggingContainer(false)">x</span>
+        <span class="right job-state small" *ngIf="(jobState$ | async) === 'RUNNING'">
+            <mat-progress-spinner
+                    class="update-spinner"
+                    [diameter]="20"
+                    [mode]="'indeterminate'">
+            </mat-progress-spinner>
+            <span>
+                update documents
+            </span>
+        </span>
+    </div>
+
+    <div class="tag-add-container" *ngIf="openEditTagContainer" [class.border-top-light-primary]="tags.length > 0">
+        <inspector-tagging [tags]="tags"
+                           [searchQuery]="searchQuery"
+                           (doneEvent$)="taggingIsDone($event)"
+                           [viewMode]="viewMode">
+        </inspector-tagging>
+    </div>
+
+    <div class="tag-remove-container" *ngIf="openEditTagContainer && tags.length > 0">
+        <inspector-tag-remove [tags]="tags"
+                              [searchQuery]="searchQuery"
+                              (doneEvent$)="taggingIsDone($event)">
+        </inspector-tag-remove>
+    </div>
+</div>
+
